@@ -2,7 +2,7 @@
 
 | Username | Name, Student ID | Domain |
 | --- | --- | --- |
-| JOBLOLI | Henry Li 40091330 | Frontend |
+| JOBLOLI | Henry Li 40091330 | TeamLead/Frontend |
 | Saikou123 | Saikou Diallo 40191902 | Frontend |
 | Asystra | William Picard 40190199 | Frontend |
 | mailh | Stefan Nechita 40110104 | Backend |
