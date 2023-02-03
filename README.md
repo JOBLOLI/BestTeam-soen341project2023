@@ -12,12 +12,11 @@
 # Programming tools:
 - Languages: 
   - Python (frontend and backend)
-  - SQL (backend)
   - HTML/CSS (frontend)
 - Tools: 
   - Docker 
   - Firebase
-  - mySQL or MangoDB (backend)
+
 - Technologies:
   - Django (frontend and backend)
  
@@ -49,3 +48,6 @@ A career service website that allows employers to post job offers and interested
   - Receive notifications on interview calls
 - Admin: 
   - Manage all user profiles and postings 
+- Recruiter:
+  - Suggest qualified candidates to open positions
+
