@@ -21,3 +21,43 @@ def index(request):
     return render(request, 'index.html', {
         "channel_name":channel_name
     })
+
+# temp .html filenames being used
+def signIn(request):
+    return render(request,"Login.html")
+
+def home(request):
+    return render(request,"Home.html")
+
+def postsignIn(request):
+    email = request.POST.get('email')
+    pasw = request.POST.get('pass')
+    try:
+        user = authe.sign_in_with_email_and_password(email,pasw)
+    except:
+        message = "Invalid Credentials"
+        return render(request,"Home.html", {"email:"email})
+
+def logout(request):
+    try:
+        del request.session['uid']
+    except:
+        pass
+    return render(request,"Login.html")
+
+def signUp(request):
+    return render(request,"Registration.html")
+
+def postsignUp(request):
+    email = request.POST.get('email')
+    pasw = request.POST.get('pass')
+    name = request.POST.get('name')
+    try:
+        user = authe.create_user_with_email_and_password(email,pasw)
+        uid = user['localId']
+        idtoken = request.session['uid']
+        print(uid)
+    except:
+        return render(request, "Registration.html")
+    return render(request,"Login.html")
+
