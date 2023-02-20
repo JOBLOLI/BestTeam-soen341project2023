@@ -36,7 +36,7 @@ def postsignIn(request):
         user = authe.sign_in_with_email_and_password(email,pasw)
     except:
         message = "Invalid Credentials"
-        return render(request,"Home.html", {"email:"email})
+        return render(request,"Home.html",{"email:"email})
 
 def logout(request):
     try:
