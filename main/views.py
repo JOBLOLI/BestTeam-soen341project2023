@@ -13,7 +13,7 @@ config={
 }
 
 firebase=pyrebase.initialize_app(config)
-authe=firebase.auth()
+auth=firebase.auth()
 database=firebase.database()
 
 def index(request):
@@ -33,10 +33,13 @@ def postsignIn(request):
     email = request.POST.get('email')
     pasw = request.POST.get('pass')
     try:
-        user = authe.sign_in_with_email_and_password(email,pasw)
+        user = auth.sign_in_with_email_and_password(email,pasw)
     except:
         message = "Invalid Credentials"
-        return render(request,"Home.html",{"email:"email})
+        return render(request,"Login.html",{"message":message})
+    session_id = user['idToken']
+    request.session['uid'] = str(session_id)
+    return render(request,"Home.html",{"email":email})
 
 def logout(request):
     try:
@@ -53,7 +56,7 @@ def postsignUp(request):
     pasw = request.POST.get('pass')
     name = request.POST.get('name')
     try:
-        user = authe.create_user_with_email_and_password(email,pasw)
+        user = auth.create_user_with_email_and_password(email,pasw)
         uid = user['localId']
         idtoken = request.session['uid']
         print(uid)

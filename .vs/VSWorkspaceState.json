@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\main"
   ],
-  "SelectedNode": "\\C:\\Users\\Michael\\Source\\Repos\\BestTeam-soen341project2023",
+  "SelectedNode": "\\main\\urls.py",
   "PreviewInSolutionExplorer": false
 }
