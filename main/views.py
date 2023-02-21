@@ -61,6 +61,7 @@ def postsignUp(request):
         idtoken = request.session['uid']
         print(uid)
     except:
-        return render(request, "Registration.html")
+        message = "Email already in use"
+        return render(request, "Registration.html",{"message":message})
     return render(request,"Login.html")
 
