@@ -16,6 +16,10 @@ firebase=pyrebase.initialize_app(config)
 authe=firebase.auth()
 database=firebase.database()
 
-def my_view(request):
+def cringe(request):
     context = {'foo': 'bar'}
     return render(request, 'home.html', context)
+
+def redirect_signin(request):
+    return render(request,'signin.html')
+
