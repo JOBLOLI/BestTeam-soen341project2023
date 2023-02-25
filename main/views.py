@@ -16,8 +16,6 @@ firebase=pyrebase.initialize_app(config)
 authe=firebase.auth()
 database=firebase.database()
 
-def index(request):
-    channel_name=database.child("Data").child("Name").get().val
-    return render(request, 'index.html', {
-        "channel_name":channel_name
-    })
+def my_view(request):
+    context = {'foo': 'bar'}
+    return render(request, 'home.html', context)
