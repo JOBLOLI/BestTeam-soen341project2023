@@ -7,20 +7,26 @@
 </head>
 <body>
   <div class="login-box">
-    <h2>Login</h2>
-    <form method="POST">
-      {% csrf_token %}
-      <div class="user-box">
-        <input type="email" name="email" required="">
-        <label>Email</label>
-      </div>
-      <div class="user-box">
-        <input type="password" name="password" required="">
-        <label>Password</label>
-      </div>
-      <input type="submit" value="Login">
-    </form>
-    
+      <h2>Login</h2>
+      <form method="POST" action="{% url 'postsignin' %}">
+        {% csrf_token %}
+        <div class="user-box">
+          <input type="email" name="email" required="">
+          <label>Email</label>
+        </div>
+        <div class="user-box">
+          <input type="password" name="password" required="">
+          <label>Password</label>
+        </div>
+        <input type="submit" value="Login">
+      </form>
+      <span><a href="{% url 'signup' %}">Sign up</a></span>
   </div>
+  <script>
+    document.querySelector('#headerMenu2 span:nth-child(2)').addEventListener('click', function() {
+      window.location.href = "{% url 'signup' %}";
+    });
+  </script>
 </body>
 </html>
+
