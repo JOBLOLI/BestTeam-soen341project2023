@@ -32,6 +32,7 @@ def home(request):
 def postsignIn(request):
     email = request.POST.get('email')
     pasw = request.POST.get('pass')
+    msg = "Login successful"
     try:
         user = auth.sign_in_with_email_and_password(email,pasw)
     except:
@@ -39,7 +40,7 @@ def postsignIn(request):
         return render(request,"Login.html",{"message":message})
     session_id = user['idToken']
     request.session['uid'] = str(session_id)
-    return render(request,"Home.html",{"email":email})
+    return render(request,"Home.html",{"email":email},{"message":msg})
 
 def logout(request):
     try:
@@ -55,6 +56,7 @@ def postsignUp(request):
     email = request.POST.get('email')
     pasw = request.POST.get('pass')
     name = request.POST.get('name')
+    msg = "Account created successfully"
     try:
         user = auth.create_user_with_email_and_password(email,pasw)
         uid = user['localId']
@@ -63,5 +65,5 @@ def postsignUp(request):
     except:
         message = "Email already in use"
         return render(request, "Registration.html",{"message":message})
-    return render(request,"Login.html")
+    return render(request,"Login.html",{"message":msg})
 
