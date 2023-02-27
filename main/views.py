@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.http import HttpResponse
 import pyrebase
 
@@ -13,13 +14,42 @@ config={
 }
 
 firebase=pyrebase.initialize_app(config)
-authe=firebase.auth()
+auth=firebase.auth()
 database=firebase.database()
 
-def cringe(request):
+def home(request):
     context = {'foo': 'bar'}
     return render(request, 'home.html', context)
 
 def redirect_signin(request):
     return render(request,'signin.html')
+
+def redirect_signup(request):
+    return render(request, 'signup.html')
+
+# signin and signup options
+def postsignup(request):
+    email = request.POST.get('email')
+    pasw = request.POST.get('password1')
+    try:
+        user = auth.create_user_with_email_and_password(email,pasw)
+        uid = user['localId']
+        idtoken = request.session['uid']
+        print(uid)
+    except:
+        message = "Email already in use"
+        return render(request, "signin.html",{"message":message})
+    return render(request,"home.html")
+
+def postsignin(request):
+    email = request.POST.get('email')
+    pasw = request.POST.get('password')
+    try:
+        user = auth.sign_in_with_email_and_password(email,pasw)
+    except:
+        message = "Invalid Credentials"
+        return render(request,"signin.html",{"message":message})
+    session_id = user['idToken']
+    request.session['uid'] = str(session_id)
+    return render(request,"home.html",{"email":email})
 
