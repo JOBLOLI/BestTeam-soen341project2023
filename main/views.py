@@ -27,6 +27,9 @@ def redirect_signin(request):
 def redirect_signup(request):
     return render(request, 'signup.html')
 
+def redirect_delete(request):
+    return render(request, 'delete.html')
+
 # signin and signup options
 def postsignup(request):
     email = request.POST.get('email')
@@ -53,3 +56,9 @@ def postsignin(request):
     request.session['uid'] = str(session_id)
     return render(request,"home.html",{"email":email})
 
+
+def accountDeletion(request):
+    """ Deletes account of currently logged in user"""
+    user = auth.current_user['localId']
+    auth.delete_user_account(user['idToken'])
+    return render(request, 'home.html')
