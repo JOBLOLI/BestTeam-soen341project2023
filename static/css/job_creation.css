@@ -1,0 +1,143 @@
+/* Style the form container */
+form {
+    margin: auto;
+    width: 50%;
+    border: 3px solid #f1f1f1;
+    padding: 20px;
+  }
+  
+  /* Style the form headings */
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style the form labels */
+  label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  
+  /* Style the form inputs */
+  input[type="text"], select, textarea, input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  
+  /* Style the submit button */
+  input[type="submit"] {
+    border-radius: 20px;
+    background-color: #a30303;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  /* Change the submit button background color on hover */
+  input[type="submit"]:hover {
+    background-color: #da3c3c;
+  }
+  
+  /* Style the form error message */
+  input:invalid, select:invalid, textarea:invalid {
+    border-color: red;
+  }
+  
+  input:invalid:focus, select:invalid:focus, textarea:invalid:focus {
+    border-color: red;
+    outline: none;
+  }
+  
+  /* Style the form success message */
+  .success-message {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    color: #a94442;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  
+  html {
+    font-family: Avenir Next,Arial,Roboto,Noto,sans-serif;
+}
+
+header{
+    display: flex;
+    flex-flow: row wrap;
+    border-bottom: 0.0625rem solid #e4e2e0;
+}
+
+header div{
+    display: flex;
+    flex-grow: 1;
+}
+
+#mainContent div, form {
+    display: flex;
+    justify-content: center;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 96vh;
+}
+#mainContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+form {
+    padding: 40px 0 20px 0px;
+    flex-wrap: wrap;
+}
+.standardContainer {
+    padding:20px;
+}
+
+.headerMenu span{
+    padding: 10px;
+    margin: 0px 3px;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+.headerMenu span:hover {
+    padding-bottom: 8px;
+    border-bottom: 2px solid #a30303;
+    color: #a30303;;
+    cursor: pointer;
+}
+.headerMenu {
+    margin: 5px 0px;
+}
+#headerLogo {
+    border-right: 1px solid #949494;
+    align-items: center;
+    justify-content: center;
+}
+#headerLogo span {
+    font-weight: 600;
+    color: #a30303;;
+}
+#headerMenu1 {
+    justify-content: left;
+}
+#headerMenu2{
+    justify-content: right;
+}
