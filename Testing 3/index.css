@@ -1,0 +1,175 @@
+html {
+    font-family: Avenir Next,Arial,Roboto,Noto,sans-serif;
+}
+
+header{
+    display: flex;
+    flex-flow: row wrap;
+    border-bottom: 0.0625rem solid #e4e2e0;
+}
+
+header div{
+    display: flex;
+    flex-grow: 1;
+}
+
+#mainContent div, form {
+    display: flex;
+    justify-content: center;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 96vh;
+}
+#mainContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+form {
+    padding: 40px 0 20px 0px;
+    flex-wrap: wrap;
+}
+.standardContainer {
+    padding:20px;
+}
+
+.headerMenu span{
+    padding: 10px;
+    margin: 0px 3px;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+.headerMenu span:hover {
+    padding-bottom: 8px;
+    border-bottom: 2px solid #a30303;
+    color: #a30303;;
+    cursor: pointer;
+}
+.headerMenu {
+    margin: 5px 0px;
+}
+#headerLogo {
+    border-right: 1px solid #949494;
+    align-items: center;
+    justify-content: center;
+}
+#headerLogo span {
+    font-weight: 600;
+    color: #a30303;;
+}
+#headerMenu1 {
+    justify-content: left;
+}
+#headerMenu2{
+    justify-content: right;
+}
+
+input {
+    border: none transparent;
+    outline: none;
+    height: 30px;
+    padding: 0px 10px;
+    flex-grow: 1;
+    font-style: italic;
+}
+
+input:focus{
+    font-style: normal;
+}
+
+label {
+    font-weight: 600;
+}
+.input-container {
+    border: 1px solid #949494;
+    border-radius: 0.5rem;
+    margin: 2px 7px;
+    padding: 0px 15px;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    height: 45px;
+    min-width: 330px;
+    max-width: 400px;
+}
+
+.input-container:hover, .input-container:focus-within {
+    box-shadow: 0px 0px 12px -5px #a30303;;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+}
+#findJobsButton {
+    font-weight: 700;
+    font-size: .875rem;
+    margin: 2px 3px;
+    line-height: 1.125rem;
+    padding: .75rem 1rem;
+    box-sizing: border-box;
+    white-space: nowrap;
+    word-break: keep-all;
+    flex-shrink: 0;
+    background-color: #a30303;;
+    border: .0625rem solid transparent;
+    border-radius: .5rem;
+    color: #fff;
+    box-shadow: none;
+    text-align: center;
+    text-decoration: none;
+    min-width: 94px;
+}
+
+#findJobsButton:hover{
+    background-color: #910303;
+    cursor: pointer;
+}
+
+.blueHyperlink{
+    color: #a30303;;
+    font-weight: 600;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+
+#trending{
+    display:flex;
+    flex-direction: column;
+}
+#trending ul{
+    visibility: hidden;
+    display: none;
+}
+#trending:hover > ul{
+    visibility: visible;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    justify-content: left;
+}
+#trending ul li{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: left;
+    align-items: center;
+}
