@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import home, redirect_signin, redirect_signup, postsignup, postsignin, redirect_job_creation, create_job, redirect_admin, jobview, logout, applytojob, adminpage, redirect_profile
+from .views import home, redirect_signin, redirect_signup, postsignup, postsignin, redirect_job_creation, create_job, redirect_admin, jobview, logout, applytojob, redirect_profile
 
 urlpatterns = [
     path('', views.home, name='homepage'),
@@ -15,7 +15,6 @@ urlpatterns = [
     path('create_job/', views.create_job, name='create_job'),
     path('jobview/', views.jobview, name='jobview'),
     path('applytojob/', views.applytojob, name='applytojob'),
-    path('adminpage/', views.redirect_admin, name='adminpage')
+    path('adminpage/', views.redirect_admin, name='adminpage'),
     path('profile/', views.redirect_profile, name='profile')
 ]
-
