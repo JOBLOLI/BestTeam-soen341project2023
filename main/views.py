@@ -43,8 +43,17 @@ def redirect_job_creation(request):
 def redirect_admin(request):
     # Check if user is signed in and is an admin
     if 'uid' in request.session and request.session['user_type'] == 'admin':
-        users = database.child('users').get().val()
-        context = {'users': users}
+        names = []
+        emails = []
+        userids = []
+        users = database.child('users').get()
+
+        # Loop iterates through users in the database and stores their userids, names and emails in 3 lists
+        for user in users.each():
+            names.append(user.val()['name'])
+            emails.append(user.val()['email'])
+            userids.append(user.key())
+
         return render(request, 'admin_p.html')
     else:
         return redirect('/signin/')
@@ -138,3 +147,7 @@ def postsignup(request):
     else:
         # Render signup page
         return render(request, 'signup.html')
+
+def accountDelete(userid):
+    """ Deletes user associated with input id """
+    database.child("users").child(userid).remove()
