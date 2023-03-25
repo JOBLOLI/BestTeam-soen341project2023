@@ -27,13 +27,28 @@ def redirect_signin(request):
 def redirect_signup(request):
     return render(request, 'signup.html')
 
+def redirect_job_creation(request):
+    # Check if user is signed in and is an employer
+    if 'uid' in request.session and request.session['user_type'] == 'employer':
+        return render(request, 'job_creation.html')
+    else:
+        return redirect('/signin/')
+    
+def redirect_admin(request):
+    # Check if user is signed in and is an employer
+    if 'uid' in request.session and request.session['user_type'] == 'admin':
+        return render(request, 'admin_p.html')
+    else:
+        return redirect('/signin/')
+
+
 # signin and signup options
 
 def postsignin(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        
+
         try:
             # Authenticate user with Firebase Realtime Database
             db = firebase.database()
@@ -43,10 +58,13 @@ def postsignin(request):
                     # Set session variables
                     request.session['uid'] = user.key()
                     request.session['user_type'] = user.val().get('user_type')
-                    
-                    # Redirect to home page
-                    return render(request, 'home.html')
-            
+
+                    # Redirect based on user type
+                    if user.val().get('user_type') == 'admin':
+                        return redirect('/adminpage/')
+                    else:
+                        return render(request, 'home.html')
+
             # User not found or invalid credentials
             return render(request, 'signin.html', {'error': 'Invalid email or password'})
         except:
@@ -55,6 +73,7 @@ def postsignin(request):
     else:
         # Render signin page
         return render(request, 'signin.html')
+
 
 def postsignup(request):
     if request.method == 'POST':

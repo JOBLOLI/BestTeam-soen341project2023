@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import home, redirect_signin, redirect_signup, postsignup, postsignin
+from .views import home, redirect_signin, redirect_signup, postsignup, postsignin, redirect_job_creation, redirect_admin
 
 urlpatterns = [
     path('', views.home, name='homepage'),
@@ -9,6 +9,8 @@ urlpatterns = [
     path('signup/', views.redirect_signup, name='signup'),
     path('admin/', admin.site.urls), 
     path('postsignup/', views.postsignup, name='postsignup'),
-    path('postsignin/', views.postsignin, name='postsignin')
+    path('postsignin/', views.postsignin, name='postsignin'),
+    path('job_creation/', views.redirect_job_creation, name='job_creation'),
+    path('adminpage/', views.redirect_admin, name='adminpage')
 ]
 

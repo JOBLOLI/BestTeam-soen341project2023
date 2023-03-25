@@ -47,7 +47,15 @@
       <span></span>
     </div>
     <div class="standardContainer">
-      <a class="blueHyperlink" href="">Post a job on Jobly</a>
+      <a class="creationButton" href="{% url 'job_creation' %}">Post a job on Jobly</a>
+      {% if message %}
+
+      <script>
+
+        alert('{{ message }}');
+
+      </script>
+      {% endif %}
     </div>
     <div class="standardContainer" id="trending">
       <div id="trendingToggle">

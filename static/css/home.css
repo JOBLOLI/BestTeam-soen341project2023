@@ -138,6 +138,12 @@ label {
     font-weight: 600;
 }
 
+.creationButton{
+    color: #a30303;;
+    font-weight: 600;
+}
+  
+
 footer {
     display: flex;
     flex-direction: column;
@@ -273,3 +279,5 @@ footer {
     color: #9f9f9f;
 
   }
+
+ 
