@@ -47,7 +47,15 @@
       <span></span>
     </div>
     <div class="standardContainer">
-      <a class="blueHyperlink" href="">Post a job on Jobly</a>
+      <a class="creationButton" href="{% url 'job_creation' %}">Post a job on Jobly</a>
+      {% if message %}
+
+      <script>
+
+        alert('{{ message }}');
+
+      </script>
+      {% endif %}
     </div>
     <div class="standardContainer" id="trending">
       <div id="trendingToggle">
@@ -76,17 +84,19 @@
         </li>
       </ul>
     </div>
+    {% for key, value in jobs.items %}
     <div class="standardContainer">
       <!-- Create section -->
       <div class="rounded-box">
         <img src="C:\Users\wpica\Pictures\OIP.jpg" class="image">
-        <a href="/templates/JobDes.html"class="line-1">IT Intern</a>   
-        <p class="line-2">Valsoft - Part time</p> 
-          <p class="line-3">Montreal, Quebec,Canada </p> 
-          <p class="line-4">Posted 2 hours ago</p> 
+        <a href="/templates/JobDes.html"class="line-1">{{value.Title}}</a>
+        <p class="line-2">{{value.Company}} - {{value.Type}}</p>
+          <p class="line-3">{{value.Location}} </p>
+          <p class="line-4">Posted 2 hours ago</p>
           <button class="save-button">Save</button>
         </div>
   </div>
+{% endfor %}
   <footer>
 
   </footer>
