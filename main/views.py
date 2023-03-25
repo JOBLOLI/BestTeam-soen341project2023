@@ -19,8 +19,6 @@ database=firebase.database()
 
 def home(request):
     jobs = database.child("jobs").get()
-    for job in jobs.each():
-        print(job.val())
     context = {"jobs":jobs.val()}
     return render(request, 'home.html', context)
 
@@ -29,6 +27,10 @@ def redirect_signin(request):
 
 def redirect_signup(request):
     return render(request, 'signup.html')
+    
+def logout(request):
+    request.session.flush()
+    return redirect(home)
 
 def redirect_job_creation(request):
     # Check if user is signed in and is an employer
@@ -57,18 +59,47 @@ def create_job(request):
             job = {
             'Title' : jobTitle,
             'Type': jobType,
-            'Location' : jobLocation
+            'Location' : jobLocation,
+            'Description' : jobDescription,
+            'Salary' : jobSalary,
+            'Applicants' : ""
             }
     
             database.child('jobs').push(job)
             # Redirect to success page
-            return home(request)
+            return redirect(home)
         except:
         # Failed to create job
             return render(request, 'job_creation.html', {'error': 'Failed to create job'})
     else:
         # Render signup page
         return render(request, 'job_creation.html')
+        
+def jobview(request):
+    jobid = request.GET['id']
+    title = database.child("jobs").child(jobid).child("Title").get().val()
+    type = database.child("jobs").child(jobid).child("Type").get().val()
+    location = database.child("jobs").child(jobid).child("Location").get().val()
+    description=database.child("jobs").child(jobid).child("Description").get().val()
+    salary=database.child("jobs").child(jobid).child("Salary").get().val()
+    context = {
+        'Title' : title,
+        'Type': type,
+        'Location' : location,
+        'Description' : description,
+        'Salary' : salary
+    }
+    return render(request, 'JobDes.html', context)
+
+def applytojob(request):
+    jobid = request.GET['id']
+    print(jobid)
+    userid = request.session['uid']
+    print(userid)
+    target = database.child("jobs").child(jobid).child("Applicants")
+    newvalue = str(target.get().val()) + request.session['uid'] + ""
+    #target.set(newvalue)
+    return redirect(home)
 
 # signin and signup options
 
@@ -86,12 +117,13 @@ def postsignin(request):
                     # Set session variables
                     request.session['uid'] = user.key()
                     request.session['user_type'] = user.val().get('user_type')
+                    request.session['email'] = user.val().get('email')
 
                     # Redirect based on user type
                     if user.val().get('user_type') == 'admin':
                         return redirect('/adminpage/')
                     else:
-                        return home(request)
+                        return redirect(home)
 
             # User not found or invalid credentials
             return render(request, 'signin.html', {'error': 'Invalid email or password'})
