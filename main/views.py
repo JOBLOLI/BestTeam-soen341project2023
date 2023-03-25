@@ -62,7 +62,8 @@ def create_job(request):
             'Location' : jobLocation,
             'Description' : jobDescription,
             'Salary' : jobSalary,
-            'Applicants' : ""
+            'Applicants' : "",
+            'Owner' : request.session['uid']
             }
     
             database.child('jobs').push(job)
@@ -87,19 +88,26 @@ def jobview(request):
         'Type': type,
         'Location' : location,
         'Description' : description,
-        'Salary' : salary
+        'Salary' : salary,
+        'key' : jobid
     }
     return render(request, 'JobDes.html', context)
 
 def applytojob(request):
-    jobid = request.GET['id']
-    print(jobid)
-    userid = request.session['uid']
-    print(userid)
-    target = database.child("jobs").child(jobid).child("Applicants")
-    newvalue = str(target.get().val()) + request.session['uid'] + ""
-    #target.set(newvalue)
-    return redirect(home)
+    if 'uid' in request.session and request.session['user_type'] == 'student':
+        jobid = request.GET['id']
+        print(jobid)
+        userid = request.session['uid']
+        print(userid)
+        applicantlist = str(database.child("jobs").child(jobid).child("Applicants").get().val())
+        if userid not in applicantlist:
+            applicantlist+= userid + ","
+            newvalue = {'Applicants': applicantlist}
+            database.child("jobs").child(jobid).update(newvalue)
+        #Add error if already applied
+        return redirect(home)
+    else:
+        return redirect('/signin/')
 
 # signin and signup options
 
