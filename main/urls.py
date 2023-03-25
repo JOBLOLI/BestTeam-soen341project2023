@@ -11,6 +11,7 @@ urlpatterns = [
     path('postsignup/', views.postsignup, name='postsignup'),
     path('postsignin/', views.postsignin, name='postsignin'),
     path('job_creation/', views.redirect_job_creation, name='job_creation'),
+    path('create_job/', views.create_job, name='create_job'),
     path('adminpage/', views.redirect_admin, name='adminpage')
 ]
 

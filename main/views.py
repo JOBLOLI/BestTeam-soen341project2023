@@ -18,7 +18,10 @@ auth=firebase.auth()
 database=firebase.database()
 
 def home(request):
-    context = {'foo': 'bar'}
+    jobs = database.child("jobs").get()
+    for job in jobs.each():
+        print(job.val())
+    context = {"jobs":jobs.val()}
     return render(request, 'home.html', context)
 
 def redirect_signin(request):
@@ -40,7 +43,32 @@ def redirect_admin(request):
         return render(request, 'admin_p.html')
     else:
         return redirect('/signin/')
+        
+def create_job(request):
+    if request.method == 'POST':
+    # Get form data
+        jobTitle = request.POST.get('jobTitle')
+        jobType = request.POST.get('jobType')
+        jobDescription = request.POST.get('jobDescription')
+        jobLocation = request.POST.get('jobLocation')
+        jobSalary = request.POST.get('jobSalary')
 
+        try:
+            job = {
+            'Title' : jobTitle,
+            'Type': jobType,
+            'Location' : jobLocation
+            }
+    
+            database.child('jobs').push(job)
+            # Redirect to success page
+            return home(request)
+        except:
+        # Failed to create job
+            return render(request, 'job_creation.html', {'error': 'Failed to create job'})
+    else:
+        # Render signup page
+        return render(request, 'job_creation.html')
 
 # signin and signup options
 
@@ -63,7 +91,7 @@ def postsignin(request):
                     if user.val().get('user_type') == 'admin':
                         return redirect('/adminpage/')
                     else:
-                        return render(request, 'home.html')
+                        return home(request)
 
             # User not found or invalid credentials
             return render(request, 'signin.html', {'error': 'Invalid email or password'})
