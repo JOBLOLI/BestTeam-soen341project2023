@@ -30,6 +30,9 @@ def redirect_signin(request):
 def redirect_signup(request):
     return render(request, 'signup.html')
 
+def redirect_profile(request):
+    return render(request, 'profile.html')
+
 def redirect_job_creation(request):
     # Check if user is signed in and is an employer
     if 'uid' in request.session and request.session['user_type'] == 'employer':
@@ -38,12 +41,14 @@ def redirect_job_creation(request):
         return redirect('/signin/')
     
 def redirect_admin(request):
-    # Check if user is signed in and is an employer
+    # Check if user is signed in and is an admin
     if 'uid' in request.session and request.session['user_type'] == 'admin':
+        users = database.child('users').get().val()
+        context = {'users': users}
         return render(request, 'admin_p.html')
     else:
         return redirect('/signin/')
-        
+
 def create_job(request):
     if request.method == 'POST':
     # Get form data
