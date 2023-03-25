@@ -13,6 +13,7 @@ urlpatterns = [
     path('job_creation/', views.redirect_job_creation, name='job_creation'),
     path('create_job/', views.create_job, name='create_job'),
     path('adminpage/', views.redirect_admin, name='adminpage'),
+    path('delete/', views.accountDelete, name='delete')
     path('profile/', views.redirect_profile, name='profile')
 ]
 

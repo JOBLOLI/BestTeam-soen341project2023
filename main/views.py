@@ -148,6 +148,7 @@ def postsignup(request):
         # Render signup page
         return render(request, 'signup.html')
 
-def accountDelete(userid):
+def accountDelete(request, user):
     """ Deletes user associated with input id """
+    user = Item.objects.get(user=user)
     database.child("users").child(userid).remove()

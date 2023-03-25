@@ -50,33 +50,17 @@
           </tr>
         </thead>
         <tbody>
+            {% for i in users %}
           <tr>
-            <td>1</td>
-            <td>John Doe</td>
-            <td>john.doe@example.com</td>
+            <td>{{ i [userids]}}</td>
+            <td>{{ i [names]}}</td>
+            <td>{{ i [emails]}}</td>
             <td>
               <a href="#" class="edit">Edit</a>
-              <a href="#" class="delete">Delete</a>
+              <input type="button" value="delete" onclick="accountDelete(this.userids[i])" />
             </td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td>Jane Smith</td>
-            <td>jane.smith@example.com</td>
-            <td>
-              <a href="#" class="edit">Edit</a>
-              <a href="#" class="delete">Delete</a>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Bob Johnson</td>
-            <td>bob.johnson@example.com</td>
-            <td>
-              <a href="#" class="edit">Edit</a>
-              <a href="#" class="delete">Delete</a>
-            </td>
-          </tr>
+            {% endfor %}
         </tbody>
       </table>
     </div>
