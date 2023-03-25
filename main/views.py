@@ -31,8 +31,11 @@ def redirect_signup(request):
 def redirect_delete(request):
     return render(request, 'delete.html')
 
-def redirect_profile(request):
+def redirect_profileEdit(request):
     return render(request, 'profilecreate.html')
+
+def redirect_profile(request):
+    return render(request, 'profile.html')
 
 # signin and signup options
 def postsignup(request):
@@ -67,8 +70,15 @@ def accountDeletion(request):
     auth.delete_user_account(user['idToken'])
     return render(request, 'home.html')
 
-def postProfile(request):
+def postProfileEdit(request):
     """Allows user to customize their profile"""
+
+    idtoken = request.session['uid']
+    a = auth.get_account_info(idtoken)
+    a = a['users']
+    a = a[0]
+    a = a['localId']
+
 
      #Basic Information
 
@@ -82,7 +92,7 @@ def postProfile(request):
 
     dataBasic = {'Name': name, 'Title': title, 'Exeperience': experience, 'Academics': academics, 'Gender': gender, 'Age': age, 'PhotoURL': url}
 
-    database.child('users').child('profiles').child('basicInfo').push(dataBasic)
+    database.child('users').child(a).child('profiles').child('basicInfo').push(dataBasic)
 
     # Contact information
 
@@ -93,7 +103,7 @@ def postProfile(request):
 
     dataContact = {'Phone': phone, 'Address': address, 'Email': email, 'Website': website}
 
-    database.child('users').child('profiles').child('contactInfo').push(dataContact)
+    database.child('users').child(a).child('profiles').child('contactInfo').push(dataContact)
 
     #Education
 
@@ -103,7 +113,7 @@ def postProfile(request):
 
     dataEducation = {'Date': gradDate, 'Degree': degree, 'School': school}
 
-    database.child('users').child('profiles').child('education').push(dataEducation)
+    database.child('users').child('a').child('profiles').child('education').push(dataEducation)
 
     #Experience
 
@@ -123,12 +133,46 @@ def postProfile(request):
     dataExpTitles = {'Title1': exp1Title, 'Title2': exp2Title, 'Title3': exp3Title}
     dataExpCompany = {'Company1': exp1Company, 'Company2': exp2Company, 'Company3': exp3Company}
 
-    database.child('users').child('profiles').child('experience').child('dates').push(dataExpDates)
-    database.child('users').child('profiles').child('experience').child('titles').push(dataExpTitles)
-    database.child('users').child('profiles').child('experience').child('company').push(dataExpCompany)
+    database.child('users').child(a).child('profiles').child('experience').child('dates').push(dataExpDates)
+    database.child('users').child(a).child('profiles').child('experience').child('titles').push(dataExpTitles)
+    database.child('users').child(a).child('profiles').child('experience').child('company').push(dataExpCompany)
 
-    #Profile Photo
+    
     
 
 
     return render(request,'profile.html')
+
+def postProfile(request):
+    """ Loads data from the database onto the user's profile """
+    idtoken = request.session['uid']
+    a = auth.get_account_info(idtoken)
+    a = a['users']
+    a = a[0]
+    a = a['localId']
+
+    # Basic Information
+
+    dataBasic = database.child('users').child(a). child('profiles').child('basicInfo').get()
+
+    name = dataBasic.val()['Name']
+    title = dataBasic.val()['Title']
+    experience = dataBasic.val()['Experience']
+    academics = dataBasic.val()['Academics']
+    gender = dataBasic.val()['Gender']
+    age = dataBasic.val()['Age']
+
+    # Contact Information
+
+    dataContact = database.child('user').child(a).child('profiles').child('contactInfo').get()
+
+    phone = dataContact.val()['Phone']
+    address = dataContact.val()['Address']
+    email = dataContact.val()['Email']
+    website = dataContact.val()['Website']
+
+    # Education
+
+    dataEducation = database.child('user').child(a).child('profiles').child('education').get()
+
+    gradDate = dataContact.val()['Date']
