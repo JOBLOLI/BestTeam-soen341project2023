@@ -42,7 +42,7 @@
         <tbody>
         {% for key, value in job.applicants.items %}
           <tr>
-            <td>{{value.name}}</td>
+            <td><a href="/profileview/?id={{key}}">{{value.name}}</a></td>
             <td>{{value.email}}</td>
             <td>
               <a href="accept/?jobid={{job.jobid}}&userid={{key}}" class="accept">Accept</a>
