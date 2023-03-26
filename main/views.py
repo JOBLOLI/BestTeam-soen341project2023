@@ -248,7 +248,20 @@ def postsignup(request):
             user_data = {
                 'email': email,
                 'password': password1,
-                'user_type': user_type
+                'user_type': user_type,
+                'Age': 'empty Age',
+                'Location': 'empty Location',
+                'Phone': 'empty Phone',
+                'Program': 'empty Program',
+                'School' : 'empty School',
+                'Email': 'empty Email',
+                'Name': 'empty Name',
+                'Specialization': 'nothing',
+                'Experience': '0',
+                'Gender': 'everything',
+                'Address': 'Address'
+
+
             }
             db.child('users').push(user_data)
             
@@ -260,3 +273,32 @@ def postsignup(request):
     else:
         # Render signup page
         return render(request, 'signup.html')
+    
+def profileview(request):
+    profileid = request.GET['id']
+    Age = database.child("users").child(profileid).child("Age").get().val()
+    Location = database.child("users").child(profileid).child("Location").get().val()
+    Phone = database.child("users").child(profileid).child("Phone").get().val()
+    Program = database.child("users").child(profileid).child("Program").get().val()
+    School = database.child("users").child(profileid).child("School").get().val()
+    Email = database.child("users").child(profileid).child("Email").get().val()
+    Name = database.child("users").child(profileid).child("Name").get().val()
+    Specialization = database.child("users").child(profileid).child("Specialization").get().val()
+    Experience = database.child("users").child(profileid).child("Experience").get().val()
+    Gender = database.child("users").child(profileid).child("Gender").get().val()
+    Address = database.child("users").child(profileid).child("Address").get().val()
+
+    context = {
+        'Age' : Age,
+        'Location' : Location,
+        'Phone' : Phone,
+        'Program' : Program,
+        'School' : School,
+        'Email' : Email,
+        'Name' : Name,
+        'Specialization' : Specialization,
+        'Experience' : Experience,
+        'Gender' : Gender,
+        'Address' : Address
+    }
+    return render(request, 'profile.html', context)

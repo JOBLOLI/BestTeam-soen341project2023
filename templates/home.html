@@ -13,7 +13,7 @@
       </div>
       <div class="headerMenu" id="headerMenu1">
         <span>Find Jobs</span>
-        <span><a href="{% url 'profile' %}">My Profile</a></span>
+        <span><a href="profileview/?id={{request.session.uid}}">My Profile</a></span>
         <span></span>
       </div>
     </div>
@@ -60,33 +60,7 @@
       </script>
       {% endif %}
     </div>
-    <div class="standardContainer" id="trending">
-      <div id="trendingToggle">
-        What's trending on Jobly
-      </div>
-      <ul>
-        <li>
-          <div>
-            <h5>Trending searches</h5>
-          </div>
-        </li>
-        <li>
-          <div>
-            <h5>Trending jobs</h5>
-          </div>
-        </li>
-        <li>
-          <div>
-            <h5>Popular cities</h5>
-          </div>
-        </li>
-        <li>
-          <div>
-            <h5>Popular companies</h5>
-          </div>
-        </li>
-      </ul>
-    </div>
+  
     {% for key, value in jobs.items %}
     <div class="standardContainer">
       <!-- Create section -->
