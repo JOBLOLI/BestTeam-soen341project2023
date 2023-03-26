@@ -1,11 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-<<<<<<< HEAD
-from .views import home, redirect_signin, redirect_signup, postsignup, postsignin, redirect_job_creation, create_job, redirect_admin, jobview, logout, applytojob, redirect_profile, jobmanage, accept, decline
-=======
-from .views import home, redirect_signin, redirect_signup, postsignup, postsignin, redirect_job_creation, create_job, redirect_admin, jobview, profileview, logout, applytojob, redirect_profile
->>>>>>> main
+from .views import home, redirect_signin, redirect_signup, postsignup, postsignin, redirect_job_creation, create_job, redirect_admin, jobview, logout, applytojob, redirect_profile, jobmanage, accept, decline, profileview
 
 urlpatterns = [
     path('', views.home, name='homepage'),
