@@ -1,0 +1,172 @@
+html {
+    font-family: Avenir Next,Arial,Roboto,Noto,sans-serif;
+}
+
+header{
+    display: flex;
+    flex-flow: row wrap;
+    border-bottom: 0.0625rem solid #e4e2e0;
+}
+
+header div{
+    display: flex;
+    flex-grow: 1;
+}
+
+#mainContent div, form {
+    display: flex;
+    justify-content: center;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 96vh;
+}
+#mainContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+form {
+    padding: 40px 0 20px 0px;
+    flex-wrap: wrap;
+}
+.standardContainer {
+    padding:20px;
+}
+
+.headerMenu span{
+    padding: 10px;
+    margin: 0px 3px;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+.headerMenu span:hover {
+    padding-bottom: 8px;
+    border-bottom: 2px solid #a30303;
+    color: #a30303;;
+    cursor: pointer;
+}
+.headerMenu {
+    margin: 5px 0px;
+}
+#headerLogo {
+    border-right: 1px solid #949494;
+    align-items: center;
+    justify-content: center;
+}
+#headerLogo span {
+    font-weight: 600;
+    color: #a30303;;
+}
+#headerMenu1 {
+    justify-content: left;
+}
+#headerMenu2{
+    justify-content: right;
+}
+
+/* Set global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style the header */
+  header1 {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline-block;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+  }
+  
+  nav ul li a:hover {
+    background-color: #555;
+  }
+  
+  /* Style the main content area */
+  main {
+    margin: 20px;
+  }
+  
+  h1, h2 {
+    margin-bottom: 10px;
+  }
+  
+  #connected-users ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #connected-users ul li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  #user-profiles table, #job-posts table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #user-profiles th, #job-posts th, #user-profiles td, #job-posts td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  #user-profiles th, #job-posts th {
+    background-color: #555;
+    color: #fff;
+  }
+  
+  #user-profiles tr:nth-child(even), #job-posts tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  #user-profiles tr:hover, #job-posts tr:hover {
+    background-color: #ddd;
+  }
+  
+  #user-profiles td a, #job-posts td a {
+    display: inline-block;
+    padding: 4px 8px;
+    text-decoration: none;
+  }
+  
+  #user-profiles td a.accept, #job-posts td a.accept {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+  
+  #user-profiles td a.decline, #job-posts td a.decline {
+    background-color: #f44336;
+    color: #fff;
+  }
+  
+  #user-profiles td a:hover, #job-posts td a:hover {
+    background-color: #ddd;
+    color: #333;
+  }

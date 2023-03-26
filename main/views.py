@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
+from email.message import EmailMessage
 import pyrebase
+import smtplib
 
 config={
     "apiKey": "AIzaSyAim4TyliA_tnns9WFI1y5eQBdlMrQm58Q",
@@ -113,6 +115,86 @@ def applytojob(request):
         return redirect(home)
     else:
         return redirect('/signin/')
+
+def jobmanage(request):
+    jobslist = database.child("jobs").shallow().get().val()
+    jobsdict={}
+    for job in jobslist:
+        applicantsdict={}
+        if database.child("jobs").child(job).child("Owner").get().val() == request.session['uid']:
+            title = database.child("jobs").child(job).child("Title").get().val()
+            type = database.child("jobs").child(job).child("Type").get().val()
+            location = database.child("jobs").child(job).child("Location").get().val()
+            salary=database.child("jobs").child(job).child("Salary").get().val()
+            applicants = database.child("jobs").child(job).child("Applicants").get().val()
+            list = applicants.split(",")
+            while("") in list:
+                list.remove("")
+            applicantsdict=dict.fromkeys(list)
+            for user in list:
+                applicantsdict[user]=database.child("users").child(user).get().val()
+                del applicantsdict[user]["password"]
+            listinginfo = {
+                'Title' : title,
+                'Type': type,
+                'Location' : location,
+                'Salary' : salary,
+                'jobid' : job,
+                'applicants' : applicantsdict
+                }
+            jobsdict[job]=listinginfo
+    context = {
+    'data' : jobsdict
+        }
+    return render(request, 'jobmanage.html', context)
+    
+def accept(request):
+    jobid=request.GET['jobid']
+    userid=request.GET['userid']
+    email=database.child("users").child(userid).child("email").get().val()
+    print("Job Accepted " + jobid + "for " + userid)
+    try:
+        server = smtplib.SMTP('localhost', 25)
+        msg = EmailMessage()
+        msg['From'] = 'mailuser@domain'
+        msg['To'] = email
+        msg['Subject'] = 'Congratulations! You have an upcoming interview'
+        body="You've been accepted for an interview for " + database.child("jobs").child(jobid).child("Title").get().val() + " at " + database.child("jobs").child(jobid).child("Company").get().val()
+        msg.set_content(body)
+        server.send_message(msg)
+        server.quit()
+        applicantlist = str(database.child("jobs").child(jobid).child("Applicants").get().val())
+        if userid in applicantlist:
+            newlist=applicantlist.replace(userid + ',', '')
+            newvalue = {'Applicants': newlist}
+            database.child("jobs").child(jobid).update(newvalue)
+    except Exception as e:
+        print(e)
+    return redirect('/jobmanage')
+
+def decline(request):
+    jobid=request.GET['jobid']
+    userid=request.GET['userid']
+    email=database.child("users").child(userid).child("email").get().val()
+    print("Job Declined " + jobid + "for " + userid)
+    try:
+        server = smtplib.SMTP('localhost', 25)
+        msg = EmailMessage()
+        msg['From'] = 'mailuser@domain'
+        msg['To'] = email
+        msg['Subject'] = 'You have been declined'
+        body="Your application has been declined for " + database.child("jobs").child(jobid).child("Title").get().val() + " at " + database.child("jobs").child(jobid).child("Company").get().val()
+        msg.set_content(body)
+        server.send_message(msg)
+        server.quit()
+        applicantlist = str(database.child("jobs").child(jobid).child("Applicants").get().val())
+        if userid in applicantlist:
+            newlist=applicantlist.replace(userid + ',', '')
+            newvalue = {'Applicants': newlist}
+            database.child("jobs").child(jobid).update(newvalue)
+    except Exception as e:
+        print(e)
+    return redirect('/jobmanage')
 
 # signin and signup options
 
