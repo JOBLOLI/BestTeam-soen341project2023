@@ -13,7 +13,7 @@
       </div>
       <div class="headerMenu" id="headerMenu1">
         <span>Find Jobs</span>
-        <span><a href="{% url 'profile' %}">My Profile</a></span>
+        <span><a href="profileview/?id={{request.session.uid}}">My Profile</a></span>
         <span></span>
       </div>
     </div>
