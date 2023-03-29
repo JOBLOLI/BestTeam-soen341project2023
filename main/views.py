@@ -302,3 +302,90 @@ def profileview(request):
         'Address' : Address
     }
     return render(request, 'profile.html', context)
+
+def redirect_edit_profile(request):
+    profileid = request.GET['id']
+    Age = database.child("users").child(profileid).child("Age").get().val()
+    Location = database.child("users").child(profileid).child("Location").get().val()
+    Phone = database.child("users").child(profileid).child("Phone").get().val()
+    Program = database.child("users").child(profileid).child("Program").get().val()
+    School = database.child("users").child(profileid).child("School").get().val()
+    Email = database.child("users").child(profileid).child("Email").get().val()
+    Name = database.child("users").child(profileid).child("Name").get().val()
+    Specialization = database.child("users").child(profileid).child("Specialization").get().val()
+    Experience = database.child("users").child(profileid).child("Experience").get().val()
+    Gender = database.child("users").child(profileid).child("Gender").get().val()
+    Address = database.child("users").child(profileid).child("Address").get().val()
+
+    context = {
+        'Age' : Age,
+        'Location' : Location,
+        'Phone' : Phone,
+        'Program' : Program,
+        'School' : School,
+        'Email' : Email,
+        'Name' : Name,
+        'Specialization' : Specialization,
+        'Experience' : Experience,
+        'Gender' : Gender,
+        'Address' : Address
+    }
+    return render(request, 'profile_edit.html', context)
+
+def edit_profile(request):
+    # Retrieve the current user's profile information from the session
+    profileid = request.session['uid']
+    current_user = firebase.database().child('users').child(profileid).get().val()
+
+    if request.method == 'POST':
+        # Get form data
+        newAge = request.POST.get('age')
+        newlocation = request.POST.get('location')
+        newphone = request.POST.get('phone')
+        newprogram = request.POST.get('program')
+        newschool = request.POST.get('school')
+        newemail = request.POST.get('email')
+        newname = request.POST.get('name')
+        newspecialization = request.POST.get('specialization')
+        newexperience = request.POST.get('experience')
+        newgender = request.POST.get('gender')
+        newaddress = request.POST.get('address')
+        
+        try:
+            # Update the user's information in the database with the form data
+            db = firebase.database()
+            db.child('users').child(profileid).update({
+                "Age": newAge,
+                "Location": newlocation,
+                "Phone": newphone,
+                "Program": newprogram,
+                "School": newschool,
+                "Email": newemail,
+                "Name": newname,
+                "Specialization": newspecialization,
+                "Experience": newexperience,
+                "Gender": newgender,
+                "Address": newaddress
+            })
+            
+            # Update the corresponding values in the session
+            request.session['Age'] = newAge
+            request.session['Location'] = newlocation
+            request.session['Phone'] = newphone
+            request.session['Program'] = newprogram
+            request.session['School'] = newschool
+            request.session['Email'] = newemail
+            request.session['Name'] = newname
+            request.session['Specialization'] = newspecialization
+            request.session['Experience'] = newexperience
+            request.session['Gender'] = newgender
+            request.session['Address'] = newaddress
+            
+            # Redirect to success page
+            return render(request,'home.html', {'success': 'Profile updated successfully'})
+        except:
+            # Failed to update profile
+            return render(request, 'profile_edit.html', {'error': 'Failed to update profile'})
+    else:
+        # Set the default values of the form fields to the current user's information
+        return render(request, 'profile_edit.html', current_user)
