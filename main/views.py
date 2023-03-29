@@ -382,7 +382,7 @@ def edit_profile(request):
             request.session['Address'] = newaddress
             
             # Redirect to success page
-            return render(request,'home.html', {'success': 'Profile updated successfully'})
+            return redirect(home)
         except:
             # Failed to update profile
             return render(request, 'profile_edit.html', {'error': 'Failed to update profile'})
