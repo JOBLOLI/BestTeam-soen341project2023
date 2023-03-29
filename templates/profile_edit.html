@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/profile_edit.css">
+</head>
+<body>
+  <div class="edit-box">
+      <h2>Edit Profile</h2>
+      <form method="post" action="{% url 'edit_profile' %}">
+        {% csrf_token %}
+        <div class="user-box">
+          <input type="text" name="age" required="">
+          <label>{{Age}}</label>
+        </div>
+        <div class="user-box">
+          <input type="text" name="location" required="">
+          <label>location</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="phone" required="">
+            <label>phone</label>
+          </div>
+        <div class="user-box">
+            <input type="text" name="program" required="">
+            <label>program</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="school" required="">
+            <label>school</label>
+        </div>
+        <div class="user-box">
+            <input type="email" name="email" required="">
+            <label>email</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="name" required="">
+            <label>name</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="specialization" required="">
+            <label>specialization</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="experience" required="">
+            <label>experience</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="gender" required="">
+            <label>gender</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="address" required="">
+            <label>address</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Edit Profile</button>
+      </form>
+  </div>
+</body>
+</html>
