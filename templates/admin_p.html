@@ -1,129 +1,113 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin Page</title>
+    <title>Admin Page</title>
     <link rel="stylesheet" type="text/css" href="/static/css/adminPage.css">
 </head>
 <body>
     <header>
         <div>
-          <div class="headerMenu" id="headerLogo">
-            <span>Jobly</span>
-          </div>
-          <div class="headerMenu" id="headerMenu1">
-            <span>Find Jobs</span>
-            <span>Upload your resume</span>
-            <span></span>
-          </div>
+            <div class="headerMenu" id="headerLogo">
+                <span>Jobly</span>
+            </div>
+            <div class="headerMenu" id="headerMenu1">
+                <span>Find Jobs</span>
+                <span>Upload your resume</span>
+                <span></span>
+            </div>
         </div>
         <div>
-          <div class="headerMenu" id="headerMenu2">
-            <span></span>
-            <span><a href="{% url 'signin' %}">Sign in</a></span>
-            <span>Employers/Post Job</span>
-          </div>
+            <div class="headerMenu" id="headerMenu2">
+                <span></span>
+                <span><a href="{% url 'signin' %}">Sign in</a></span>
+                <span>Employers/Post Job</span>
+            </div>
         </div>
-      </header>
+    </header>
 
-      <main>
+    <main>
         <h1>Admin Dashboard</h1>
-    
+
         <h1>Connected Users</h1>
-    <div id="connected-users">
-      <ul>
-        <li>User 1</li>
-        <li>User 2</li>
-        <li>User 3</li>
-        <li>User 4</li>
-      </ul>
-    </div>
+        <div id="connected-users">
+            <ul>
+                <li>User 1</li>
+                <li>User 2</li>
+                <li>User 3</li>
+                <li>User 4</li>
+            </ul>
+        </div>
 
-    <h1>User Profiles</h1>
-    <div id="user-profiles">
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>John Doe</td>
-            <td>john.doe@example.com</td>
-            <td>
-              <a href="#" class="edit">Edit</a>
-              <a href="#" class="delete">Delete</a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jane Smith</td>
-            <td>jane.smith@example.com</td>
-            <td>
-              <a href="#" class="edit">Edit</a>
-              <a href="#" class="delete">Delete</a>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Bob Johnson</td>
-            <td>bob.johnson@example.com</td>
-            <td>
-              <a href="#" class="edit">Edit</a>
-              <a href="#" class="delete">Delete</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <h1>User Profiles</h1>
+        <div id="user-profiles">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr>
+                        {% for value in row %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                        <td>
+                            <a href="#" class="edit">Edit</a>
+                            <input type="button" value="Delete" onclick="accountDelete()" />
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    <h1>Job Posts</h1>
-    <div id="job-posts">
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Software Developer</td>
-            <td>Develop software applications</td>
-            <td>
-              <a href="#" class="edit">Edit</a>
-              <a href="#" class="delete">Delete</a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Web Designer</td>
-            <td>Design websites and user interfaces</td>
-            <td>
-              <a href="#" class="edit">Edit</a>
-              <a href="#" class="delete">Delete</a>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Data Analyst</td>
-            <td>Analyze data and provide insights</td>
-            <td>
-              <a href="#" class="edit">Edit</a>
-              <a href="#" class="delete">Delete</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </main>
+        <h1>Job Posts</h1>
+        <div id="job-posts">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Software Developer</td>
+                        <td>Develop software applications</td>
+                        <td>
+                            <a href="#" class="edit">Edit</a>
+                            <a href="#" class="delete">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Web Designer</td>
+                        <td>Design websites and user interfaces</td>
+                        <td>
+                            <a href="#" class="edit">Edit</a>
+                            <a href="#" class="delete">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Data Analyst</td>
+                        <td>Analyze data and provide insights</td>
+                        <td>
+                            <a href="#" class="edit">Edit</a>
+                            <a href="#" class="delete">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 
 </body>
 </html>

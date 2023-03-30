@@ -47,9 +47,22 @@ def redirect_job_creation(request):
 def redirect_admin(request):
     # Check if user is signed in and is an admin
     if 'uid' in request.session and request.session['user_type'] == 'admin':
-        users = database.child('users').get().val()
-        context = {'users': users}
-        return render(request, 'admin_p.html')
+        names = []
+        emails = []
+        userids = []
+        users = database.child('users').get()
+
+        # Loop iterates through users in the database and stores their userids, names and emails in 3 lists
+        for user in users.each():
+            if (user.val()['user_type'] == 'admin'):
+                continue
+            else:
+                names.append(user.val()['Name'])
+                emails.append(user.val()['email'])
+                userids.append(user.key())
+        data = {'userids': userids, 'names': names, 'emails': emails}
+        rows = list(zip(*data.values()))
+        return render(request, 'admin_p.html', {"rows":rows})
     else:
         return redirect('/signin/')
 
