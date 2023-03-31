@@ -1,29 +1,15 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html>
 <head>
     <title>Job Creation Page</title>
     <link rel="stylesheet" type="text/css" href="/static/css/job_creation.css">
-</head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  </head>
 <body>
-    <header>
-        <div>
-          <div class="headerMenu" id="headerLogo">
-            <span>Jobly</span>
-          </div>
-          <div class="headerMenu" id="headerMenu1">
-            <span>Find Jobs</span>
-            <span>Upload your resume</span>
-            <span></span>
-          </div>
-        </div>
-        <div>
-          <div class="headerMenu" id="headerMenu2">
-            <span></span>
-            <span><a href="{% url 'signin' %}">Sign in</a></span>
-            <span>Employers/Post Job</span>
-          </div>
-        </div>
-      </header>
+  {% include 'header.html' %}
     <h1>Create a Job Posting</h1>
     <form method="post" action="{% url 'create_job' %}">
         {% csrf_token %}
