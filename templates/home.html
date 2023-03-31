@@ -1,33 +1,18 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Job Search</title>
   <link rel="stylesheet" type="text/css" href="/static/css/home.css">
+      <!-- Include jQuery -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-  <header>
-    <div>
-      <div class="headerMenu" id="headerLogo">
-        <span>Jobly</span>
-      </div>
-      <div class="headerMenu" id="headerMenu1">
-        <span>Find Jobs</span>
-        <span><a href="profileview/?id={{request.session.uid}}">My Profile</a></span>
-        <span></span>
-      </div>
-    </div>
-    <div>
-      <div class="headerMenu" id="headerMenu2">
-        {% if request.session.uid %}
-        <span><a href="{% url 'logout' %}">Logout</a></span>
-        {% else %}
-        <span><a href="{% url 'signin' %}">Sign in</a></span>
-        {% endif %}
-        <span><a href="{% url 'jobmanage' %}">Employers</a><</span>
-      </div>
-    </div>
-  </header>
+  {% include 'header.html' %}
+
+  
   <div id="mainContent">
     <form>
       <div class="input-container">
@@ -76,6 +61,7 @@
           </form>
         </div>
   </div>
+
 {% endfor %}
   <footer>
 

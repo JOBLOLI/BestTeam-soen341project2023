@@ -1,29 +1,16 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html>
 <head>
   <link rel="stylesheet" href="/static/css/GitHub_job_des.css">
   <title>HTML MAIN JOB DESCRIPTION PAGE</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
-  <header>
-    <div>
-      <div class="headerMenu" id="headerLogo">
-        <span>Jobly</span>
-      </div>
-      <div class="headerMenu" id="headerMenu1">
-        <span>Find Jobs</span>
-        <span>Upload your resume</span>
-        <span></span>
-      </div>
-    </div>
-    <div>
-      <div class="headerMenu" id="headerMenu2">
-        <span></span>
-        <span><a href="{% url 'signin' %}">Sign in</a></span>
-        <span>Employers/Post Job</span>
-      </div>
-    </div>
-  </header>
+  {% include 'header.html' %}
+
   <div class="static-container">
   <div class="job-info-container">
     <p class="line-1">{{Title}}</p>

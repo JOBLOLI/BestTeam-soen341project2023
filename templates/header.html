@@ -1,0 +1,22 @@
+<header>
+    <div>
+      <div class="headerMenu" id="headerLogo">
+        <span>Jobly</span>
+      </div>
+      <div class="headerMenu" id="headerMenu1">
+        <span>Find Jobs</span>
+        <span><a href="profileview/?id={{request.session.uid}}">My Profile</a></span>
+        <span></span>
+      </div>
+    </div>
+    <div>
+      <div class="headerMenu" id="headerMenu2">
+        {% if request.session.uid %}
+        <span><a href="{% url 'logout' %}">Logout</a></span>
+        {% else %}
+        <span><a href="{% url 'signin' %}">Sign in</a></span>
+        {% endif %}
+        <span><a href="{% url 'jobmanage' %}">Employers</a><</span>
+      </div>
+    </div>
+  </header>
