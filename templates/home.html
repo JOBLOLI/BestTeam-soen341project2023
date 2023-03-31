@@ -13,15 +13,18 @@
       </div>
       <div class="headerMenu" id="headerMenu1">
         <span>Find Jobs</span>
-        <span>Upload your resume</span>
+        <span><a href="profileview/?id={{request.session.uid}}">My Profile</a></span>
         <span></span>
       </div>
     </div>
     <div>
       <div class="headerMenu" id="headerMenu2">
-        <span></span>
+        {% if request.session.uid %}
+        <span><a href="{% url 'logout' %}">Logout</a></span>
+        {% else %}
         <span><a href="{% url 'signin' %}">Sign in</a></span>
-        <span>Employers/Post Job</span>
+        {% endif %}
+        <span><a href="{% url 'jobmanage' %}">Employers</a><</span>
       </div>
     </div>
   </header>
@@ -47,46 +50,33 @@
       <span></span>
     </div>
     <div class="standardContainer">
-      <a class="blueHyperlink" href="">Post a job on Jobly</a>
+      <a class="creationButton" href="{% url 'job_creation' %}">Post a job on Jobly</a>
+      {% if message %}
+
+      <script>
+
+        alert('{{ message }}');
+
+      </script>
+      {% endif %}
     </div>
-    <div class="standardContainer" id="trending">
-      <div id="trendingToggle">
-        What's trending on Jobly
-      </div>
-      <ul>
-        <li>
-          <div>
-            <h5>Trending searches</h5>
-          </div>
-        </li>
-        <li>
-          <div>
-            <h5>Trending jobs</h5>
-          </div>
-        </li>
-        <li>
-          <div>
-            <h5>Popular cities</h5>
-          </div>
-        </li>
-        <li>
-          <div>
-            <h5>Popular companies</h5>
-          </div>
-        </li>
-      </ul>
-    </div>
+  
+    {% for key, value in jobs.items %}
     <div class="standardContainer">
       <!-- Create section -->
       <div class="rounded-box">
         <img src="C:\Users\wpica\Pictures\OIP.jpg" class="image">
-        <a href="/templates/JobDes.html"class="line-1">IT Intern</a>   
-        <p class="line-2">Valsoft - Part time</p> 
-          <p class="line-3">Montreal, Quebec,Canada </p> 
-          <p class="line-4">Posted 2 hours ago</p> 
-          <button class="save-button">Save</button>
+        <a href="jobview/?id={{key}}"class="line-1">{{value.Title}}</a>
+        <p class="line-2">{{value.Company}} - {{value.Type}}</p>
+          <p class="line-3">{{value.Location}} </p>
+          <p class="line-4">Posted 2 hours ago</p>
+          <form action="applytojob/?id={{key}}" method="post">
+          {% csrf_token %}
+          <button class="apply-button">Apply Now</button>
+          </form>
         </div>
   </div>
+{% endfor %}
   <footer>
 
   </footer>

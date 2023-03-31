@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Job Search</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/profile.css">
+    </head>
+    <body>
+        <header class="headerMenu">
+            <div id="headerLogo">
+                <span>Jobly</span>
+            </div>
+            <form id="findPeopleForm">
+                <div class="input-container">
+                    <span id="searchIcon">&#x1F50E</span>
+                    <input type="search" name="Who" id="findPeople" title="Who" placeholder="Search">
+                </div>
+                <div class="button-container">
+                    <button  id="findPeopleButton">Find</button>
+                </div>
+            </form>
+            <div class="headerMenu" id="profileItems">
+                <span>Messages &#x1f514</span>
+                <span><a href="redirect_edit_profile/?id={{request.session.uid}}">Edit Profile</a></span>
+                <span><img id="profileIcon" src="/static/images/img_avatar.png" alt="P"></span>
+            </div>
+        </header>
+        <div id="info">
+            <div id="overviewInfo" class="profileInfo">
+                <div id="name">{{Name}}</div>
+                <img id="profilePicture" alt="Profile picture" src="/static/images/img_avatar.png">
+                <div id="specialization">{{specialization}}</div>
+                <hr>
+                <div class="infoSubTitle">BASIC INFORMATION</div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="infoLabel">EXPERIENCE:</td>
+                            <td>{{Experience}}</td>
+                        </tr>
+                        <tr>
+                            <td class="infoLabel">GENDER:</td>
+                            <td>{{Gender}}</td>
+                        </tr>
+                        <tr>
+                            <td class="infoLabel">AGE:</td>
+                            <td>{{Age}}</td>
+                        </tr>
+                        <tr>
+                            <td class="infoLabel">LOCATION:</td>
+                            <td>{{Location}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>        
+            <div id="moreDetails" class="profileInfo">
+                <div class="infoSubTitle">SKILLS</div>
+                <div id="skills">
+                        <span>UI/UX</span>
+                        <span>Web Design</span>
+                        <span>Branding</span>
+                        <span>Teamwork</span>
+                        <span>Decision Making</span>
+                        <span>Social Media and Advertising</span>
+                </div>
+                <hr>
+                <div class="infoSubTitle">CONTACT INFORMATION</div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="infoLabel">Phone:</td>
+                            <td>{{Phone}}</td>
+                        </tr>
+                        <tr>
+                            <td class="infoLabel">Address:</td>
+                            <td>{{Address}}</td>
+                        </tr>
+                        <tr>
+                            <td class="infoLabel">E-mail:</td>
+                            <td>{{Email}}</td>
+                        </tr>
+                        <tr>
+                            <td class="infoLabel">Website:</td>
+                            <td><a href='www.johndoe.com'>www.johndoe.com</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <div class="infoSubTitle">EDUCATION</div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Program: {{Program}}</td>
+                            <td>School: {{School}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <hr>
+            </div>
+        </div>
+    </body>
+</html>

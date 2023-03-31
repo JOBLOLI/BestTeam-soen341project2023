@@ -9,3 +9,5 @@ services:
     image: app:django
     container_name: django_container
     command: python manage.py runserver 0.0.0.0:8000
+    #network_mode: host
+

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Job Creation Page</title>
-    <link rel="stylesheet" type="text/css" href="job_creation.css">
+    <title>Job Creation Page</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/job_creation.css">
 </head>
 <body>
     <header>
@@ -24,28 +24,36 @@
           </div>
         </div>
       </header>
-	<h1>Create a Job Posting</h1>
-	<form>
-		<label for="jobTitle">Job Title:</label>
-		<input type="text" id="jobTitle" name="jobTitle" required><br><br>
-		
-		<label for="jobType">Job Type:</label>
-		<select id="jobType" name="jobType">
-			<option value="fullTime">Full Time</option>
-			<option value="partTime">Part Time</option>
-			<option value="internship">Internship</option>
-		</select><br><br>
-		
-		<label for="jobDescription">Job Description:</label><br>
-		<textarea id="jobDescription" name="jobDescription" rows="5" cols="50" required></textarea><br><br>
-		
-		<label for="jobLocation">Job Location:</label>
-		<input type="text" id="jobLocation" name="jobLocation" required><br><br>
-		
-		<label for="jobSalary">Salary:</label>
-		<input type="number" id="jobSalary" name="jobSalary" required><br><br>
-		
-		<input type="submit" value="Create Job">
-	</form>
+    <h1>Create a Job Posting</h1>
+    <form method="post" action="{% url 'create_job' %}">
+        {% csrf_token %}
+        <label for="jobTitle">Job Title:</label>
+        <input type="text" id="jobTitle" name="jobTitle" required><br><br>
+        
+        <label for="jobType">Job Type:</label>
+        <select id="jobType" name="jobType">
+            <option value="Full-Time">Full Time</option>
+            <option value="Part-Time">Part Time</option>
+            <option value="Internship">Internship</option>
+        </select><br><br>
+        
+        <label for="jobDescription">Job Description:</label><br>
+        <textarea id="jobDescription" name="jobDescription" rows="5" cols="50" required></textarea><br><br>
+        
+        <label for="jobLocation">Job Location:</label>
+        <input type="text" id="jobLocation" name="jobLocation" required><br><br>
+        
+        <label for="jobSalary">Salary:</label>
+        <input type="number" id="jobSalary" name="jobSalary" required><br><br>
+        
+        <input type="submit" value="Create Job">
+    </form>
+    
+    {% if message %}
+    <script>
+        alert('{{ message }}');
+    </script>
+    {% endif %}
+    
 </body>
 </html>

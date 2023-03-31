@@ -1,0 +1,245 @@
+
+html {
+    font-family: 'Comic Sans MS';
+    background-color: #f3f2f2;
+}
+
+header{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    border-bottom: 0.0625rem solid #e4e2e0;
+    padding: 5px 0px;
+    background-color: white;
+}
+
+header div{
+    display: flex;
+    flex-grow: 1;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#headerLogo {
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    max-width: 100px;
+}
+#headerLogo span {
+    font-weight: 600;
+    font-size: 1.2em;
+    color: #a30303;;
+}
+#profileItems{
+    flex-grow: 1;
+    align-items: center;
+    justify-content: right;
+}
+#findPeopleForm {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+}
+#profileItems span{
+    font-weight: 500;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+#profileItems span:hover {
+    color: #a30303;;
+    cursor: pointer;
+}
+.headerMenu {
+    margin-bottom: 5px;
+    align-items: center;
+}
+#findPeople {
+    border: none transparent;
+    outline: none;
+    height: 20px;
+    padding: 0px 10px;
+    flex-grow: 1;
+    font-style: italic;
+}
+
+#findPeople:focus{
+    font-style: normal;
+}
+
+label {
+    font-weight: 600;
+}
+.input-container {
+    border: 1px solid #949494;
+    border-radius: 0.5rem;
+    margin: 2px 1px;
+    padding: 0px 15px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    min-width: 200px;
+    max-width: 400px;
+}
+
+#searchIcon {
+    display: flex;
+    flex-grow: 0;
+    justify-content: left;
+}
+.input-container:hover, .input-container:focus-within {
+    box-shadow: 0px 0px 12px -5px #a30303;;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 0;
+}
+#findPeopleButton {
+    font-weight: 700;
+    font-size: .875rem;
+    margin: 2px 7px;
+    height: 40px;
+    padding: .75rem 1rem;
+    box-sizing: border-box;
+    white-space: nowrap;
+    word-break: keep-all;
+    flex-shrink: 0;
+    background-color: #a30303;;
+    border: .0625rem solid transparent;
+    border-radius: .5rem;
+    color: #fff;
+    box-shadow: none;
+    text-align: center;
+    text-decoration: none;
+    min-width: 94px;
+}
+
+#findPeopleButton:hover{
+    background-color: #910303;
+    cursor: pointer;
+}
+#profileIcon {
+    border-radius: 50%;
+    width: 45px;
+}
+a{
+    color: #a30303;
+    font-weight: 400;
+}
+
+a:hover {
+    color: blue;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    flex-grow: 1;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 7px rgb(129, 126, 126);
+}
+
+#profilePicture {
+    display: flex;
+    flex-grow: 0;
+    align-self: center;
+    height: auto;
+    width: 100%;
+    margin: 2px;
+}
+
+
+#info {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+
+#overviewInfo {
+    flex-basis: 15%;
+}
+
+#moreDetails {
+    flex-basis: 70%;
+    margin-left: 20px;
+}
+
+#skills {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    align-self: flex-start;
+}
+
+#skills > span {
+    background-color: #e0e0e0;
+    padding: 2px 5px;
+    margin: 2px;
+    border-radius: 7px;
+}
+
+#name {
+    color: #a30303;
+    font-family: 'Courier';
+    font-weight: 900;
+    font-size: 1.8em;
+}
+
+#specialization{
+    align-self: center;
+    font-family: 'Comic Sans MS';
+}
+
+.infoSubTitle {
+    display: flex;
+    align-self: flex-start;
+    color: #a30303;
+    font-family: 'Lucida';
+    font-weight: 900;
+    font-size: 1em;
+    font-style: italic;
+    margin-left: 15px;
+    padding: 5px 5px 0px 5px;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    padding: 5px 3px;
+}
+
+hr {
+    width: 97%;
+    color: black;
+}
+
+.infoLabel {
+    font-family: 'Courier';
+    font-weight: 900;
+    text-transform: uppercase;
+}

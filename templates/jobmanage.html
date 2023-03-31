@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Listing Page</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/jobmanagepage.css">
+</head>
+<body>
+    <header>
+        <div>
+          <div class="headerMenu" id="headerLogo">
+            <span>Jobly</span>
+          </div>
+          <div class="headerMenu" id="headerMenu1">
+            <span>Find Jobs</span>
+            <span>Upload your resume</span>
+            <span></span>
+          </div>
+        </div>
+        <div>
+          <div class="headerMenu" id="headerMenu2">
+            <span></span>
+            <span><a href="{% url 'signin' %}">Sign in</a></span>
+            <span>Employers/Post Job</span>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <h1>Job Listing Management</h1>
+            {% for key, job in data.items %}
+            <h2>{{job.Title}}</h2>
+                {{job.Type}} - {{job.Location}} - {{job.Salary}}$/year
+    <div id="user-profiles">
+      <table>
+        <thead>
+          <tr>
+            <th>Profile</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for key, value in job.applicants.items %}
+          <tr>
+            <td><a href="/profileview/?id={{key}}">{{value.name}}</a></td>
+            <td>{{value.email}}</td>
+            <td>
+              <a href="accept/?jobid={{job.jobid}}&userid={{key}}" class="accept">Accept</a>
+              <a href="decline/?jobid={{job.jobid}}&userid={{key}}" class="decline">Decline</a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endfor %}
+  </main>
+
+</body>
+</html>
