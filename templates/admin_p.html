@@ -57,7 +57,7 @@
                         {% endfor %}
                         <td>
                             <a href="#" class="edit">Edit</a>
-                            <input type="button" value="Delete" onclick="accountDelete()" />
+                            <a href="#" class="delete">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -77,33 +77,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for row in jobrows %}
                     <tr>
-                        <td>1</td>
-                        <td>Software Developer</td>
-                        <td>Develop software applications</td>
+                        {% for value in row %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
                         <td>
                             <a href="#" class="edit">Edit</a>
                             <a href="#" class="delete">Delete</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Web Designer</td>
-                        <td>Design websites and user interfaces</td>
-                        <td>
-                            <a href="#" class="edit">Edit</a>
-                            <a href="#" class="delete">Delete</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Data Analyst</td>
-                        <td>Analyze data and provide insights</td>
-                        <td>
-                            <a href="#" class="edit">Edit</a>
-                            <a href="#" class="delete">Delete</a>
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
