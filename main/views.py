@@ -47,9 +47,37 @@ def redirect_job_creation(request):
 def redirect_admin(request):
     # Check if user is signed in and is an admin
     if 'uid' in request.session and request.session['user_type'] == 'admin':
-        users = database.child('users').get().val()
-        context = {'users': users}
-        return render(request, 'admin_p.html')
+        names = []
+        emails = []
+        userids = []
+        titles = []
+        descriptions = []
+        jobids = []
+        jobs = database.child('jobs').get()
+        users = database.child('users').get()
+
+        # Loop iterates through users in the database and stores their userids, names and emails in 3 lists, unless they are admin
+        for user in users.each():
+            if (user.val()['user_type'] == 'admin'):
+                continue
+            else:
+                names.append(user.val()['Name'])
+                emails.append(user.val()['email'])
+                userids.append(user.key())
+
+        # Loop iterates through jobs in the database and stores their jobids, titles and descriptions in 3 lists
+        for job in jobs.each():
+            titles.append(job.val()['Title'])
+            descriptions.append(job.val()['Description'])
+            jobids.append(job.key())
+
+
+        userdata = {'userids': userids, 'names': names, 'emails': emails}
+        jobdata = {'jobids': jobids, 'titles': titles, 'descriptions': descriptions}
+
+        userrows = list(zip(*userdata.values()))
+        jobrows = list(zip(*jobdata.values()))
+        return render(request, 'admin_p.html', {"rows":userrows, "jobrows": jobrows})
     else:
         return redirect('/signin/')
 
