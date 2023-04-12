@@ -277,7 +277,7 @@ def postsignup(request):
                 'email': email,
                 'password': password1,
                 'user_type': user_type,
-                'Age': 'empty Age',
+                'Age': '',
                 'Location': 'empty Location',
                 'Phone': 'empty Phone',
                 'Program': 'empty Program',
@@ -303,58 +303,36 @@ def postsignup(request):
         return render(request, 'signup.html')
     
 def profileview(request):
-    # If user type is student, display student profile
-    if 'uid' in request.session and request.session['user_type'] == 'student':
-        profileid = request.GET['id']
-        Age = database.child("users").child(profileid).child("Age").get().val()
-        Location = database.child("users").child(profileid).child("Location").get().val()
-        Phone = database.child("users").child(profileid).child("Phone").get().val()
-        Program = database.child("users").child(profileid).child("Program").get().val()
-        School = database.child("users").child(profileid).child("School").get().val()
-        Email = database.child("users").child(profileid).child("Email").get().val()
-        Name = database.child("users").child(profileid).child("Name").get().val()
-        Specialization = database.child("users").child(profileid).child("Specialization").get().val()
-        Experience = database.child("users").child(profileid).child("Experience").get().val()
-        Gender = database.child("users").child(profileid).child("Gender").get().val()
-        Address = database.child("users").child(profileid).child("Address").get().val()
-
-        context = {
-            'Age' : Age,
-            'Location' : Location,
-            'Phone' : Phone,
-            'Program' : Program,
-            'School' : School,
-            'Email' : Email,
-            'Name' : Name,
-            'Specialization' : Specialization,
-            'Experience' : Experience,
-            'Gender' : Gender,
-            'Address' : Address
-        }
-    # If user type is employer, display employer profile
-    if 'uid' in request.session and request.session['user_type'] == 'employer':
-        profileid = request.GET['id']
-        Company = database.child("users").child(profileid).child("Company").get().val()
-        Vision = database.child("users").child(profileid).child("Vision").get().val()
-        Industry = database.child("users").child(profileid).child("Industry").get().val()
-        Website = database.child("users").child(profileid).child("Website").get().val()
-        Size = database.child("users").child(profileid).child("Size").get().val()
-        Location = database.child("users").child(profileid).child("Location").get.val()
-        Email = database.child("users").child(profileid).child("Email").get().val()
-        Name = database.child("users").child(profileid).child("Name").get().val()
-
-        context = {
-            'Company' : Company,
-            'Vision' : Vision,
-            'Industry' : Industry,
-            'Website' : Website,
-            'Size' : Size,
-            'Location' : Location,
-            'Email' : Email,
-            'Name' : Name
+    if 'uid' in request.session:
+        if request.session['user_type'] == 'student':
+            profileid = request.GET['id']
+            user_data = database.child("users").child(profileid).get().val()
+            completed_fields = sum(bool(user_data.get(key)) for key in user_data)
+            total_fields = len(user_data.keys())
+            completion = int(completed_fields / total_fields * 100)
+            context = {
+                'Age': user_data.get("Age"),
+                'Location': user_data.get("Location"),
+                'Phone': user_data.get("Phone"),
+                'Program': user_data.get("Program"),
+                'School': user_data.get("School"),
+                'Email': user_data.get("Email"),
+                'Name': user_data.get("Name"),
+                'Specialization': user_data.get("Specialization"),
+                'Experience': user_data.get("Experience"),
+                'Gender': user_data.get("Gender"),
+                'Address': user_data.get("Address"),
+                'completion': completion
             }
+            return render(request, 'profile.html', context)
+        elif request.session['user_type'] == 'employer':
+            profileid = request.GET['id']
+    #Here we would put the context and all the get functions to take from database        
+            return render(request, 'Employer_profile.html')
+    # If user is not logged in, redirect to login page
+    else:
+        return redirect('login')
 
-    return render(request, 'profile.html', context)
 
 def redirect_edit_profile(request):
     # If user type is student, display student profile
