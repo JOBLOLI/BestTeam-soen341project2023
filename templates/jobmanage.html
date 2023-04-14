@@ -3,33 +3,17 @@
 <head>
 	<title>Listing Page</title>
     <link rel="stylesheet" type="text/css" href="/static/css/jobmanagepage.css">
-</head>
-<body>
-    <header>
-        <div>
-          <div class="headerMenu" id="headerLogo">
-            <span>Jobly</span>
-          </div>
-          <div class="headerMenu" id="headerMenu1">
-            <span>Find Jobs</span>
-            <span>Upload your resume</span>
-            <span></span>
-          </div>
-        </div>
-        <div>
-          <div class="headerMenu" id="headerMenu2">
-            <span></span>
-            <span><a href="{% url 'signin' %}">Sign in</a></span>
-            <span>Employers/Post Job</span>
-          </div>
-        </div>
-      </header>
-
+        <!-- Include jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    {% include 'header.html' %}
       <main>
         <h1>Job Listing Management</h1>
             {% for key, job in data.items %}
             <h2>{{job.Title}}</h2>
                 {{job.Type}} - {{job.Location}} - {{job.Salary}}$/year
+            <h4><a href="delete/?jobid={{job.jobid}}">Delete Listing</a></h4>
     <div id="user-profiles">
       <table>
         <thead>
@@ -42,7 +26,7 @@
         <tbody>
         {% for key, value in job.applicants.items %}
           <tr>
-            <td><a href="/profileview/?id={{key}}">{{value.name}}</a></td>
+            <td><a href="/profileview/?id={{key}}">{{value.Name}}</a></td>
             <td>{{value.email}}</td>
             <td>
               <a href="accept/?jobid={{job.jobid}}&userid={{key}}" class="accept">Accept</a>
