@@ -17,6 +17,7 @@ urlpatterns = [
     path('jobmanage/', views.jobmanage, name='jobmanage'),
     path('jobmanage/accept/', views.accept, name='accept'),
     path('jobmanage/decline/', views.decline, name='decline'),
+    path('jobmanage/delete/', views.delete, name='delete'),
     path('applytojob/', views.applytojob, name='applytojob'),
     path('adminpage/', views.redirect_admin, name='adminpage'),
     path('profile/', views.redirect_profile, name='profile'),
