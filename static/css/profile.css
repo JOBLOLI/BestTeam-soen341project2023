@@ -1,6 +1,6 @@
 
 html {
-    font-family: 'Comic Sans MS';
+    font-family: 'Comic Sans MS', sans-serif;
     background-color: #f3f2f2;
 }
 
@@ -203,21 +203,21 @@ a:hover {
 
 #name {
     color: #a30303;
-    font-family: 'Courier';
+    font-family: 'Courier', sans-serif;
     font-weight: 900;
     font-size: 1.8em;
 }
 
 #specialization{
     align-self: center;
-    font-family: 'Comic Sans MS';
+    font-family: 'Comic Sans MS', sans-serif;
 }
 
 .infoSubTitle {
     display: flex;
     align-self: flex-start;
     color: #a30303;
-    font-family: 'Lucida';
+    font-family: 'Lucida', sans-serif;
     font-weight: 900;
     font-size: 1em;
     font-style: italic;
@@ -239,7 +239,7 @@ hr {
 }
 
 .infoLabel {
-    font-family: 'Courier';
+    font-family: 'Courier', sans-serif;
     font-weight: 900;
     text-transform: uppercase;
 }

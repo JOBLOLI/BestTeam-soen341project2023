@@ -5,6 +5,13 @@ from email.message import EmailMessage
 import pyrebase
 import smtplib
 
+SIGNIN_PAGE = '/signin/'
+
+SIGNIN_FILE = 'signin.html'
+SIGNUP_FILE = 'signup.html'
+PROFILE_FILE = 'profile.html'
+JOB_CREATION_FILE = 'job_creation.html'
+
 config={
     "apiKey": "AIzaSyAim4TyliA_tnns9WFI1y5eQBdlMrQm58Q",
     "authDomain": "djangoproject-620c6.firebaseapp.com",
@@ -25,24 +32,24 @@ def home(request):
     return render(request, 'home.html', context)
 
 def redirect_signin(request):
-    return render(request,'signin.html')
+    return render(request, SIGNIN_FILE)
 
 def redirect_signup(request):
-    return render(request, 'signup.html')
+    return render(request, SIGNUP_FILE)
     
 def logout(request):
     request.session.flush()
     return redirect(home)
 
 def redirect_profile(request):
-    return render(request, 'profile.html')
+    return render(request, PROFILE_FILE)
 
 def redirect_job_creation(request):
     # Check if user is signed in and is an employer
     if 'uid' in request.session and request.session['user_type'] == 'employer':
-        return render(request, 'job_creation.html')
+        return render(request, JOB_CREATION_FILE)
     else:
-        return redirect('/signin/')
+        return redirect(SIGNIN_PAGE)
     
 def redirect_admin(request):
     # Check if user is signed in and is an admin
@@ -79,7 +86,7 @@ def redirect_admin(request):
         jobrows = list(zip(*jobdata.values()))
         return render(request, 'admin_p.html', {"rows":userrows, "jobrows": jobrows})
     else:
-        return redirect('/signin/')
+        return redirect(SIGNIN_PAGE)
 
 def create_job(request):
     if request.method == 'POST':
@@ -106,10 +113,10 @@ def create_job(request):
             return redirect(home)
         except:
         # Failed to create job
-            return render(request, 'job_creation.html', {'error': 'Failed to create job'})
+            return render(request, JOB_CREATION_FILE, {'error': 'Failed to create job'})
     else:
         # Render signup page
-        return render(request, 'job_creation.html')
+        return render(request, JOB_CREATION_FILE)
         
 def jobview(request):
     jobid = request.GET['id']
@@ -142,7 +149,7 @@ def applytojob(request):
         #Add error if already applied
         return redirect(home)
     else:
-        return redirect('/signin/')
+        return redirect(SIGNIN_PAGE)
 
 def jobmanage(request):
     jobslist = database.child("jobs").shallow().get().val()
@@ -249,13 +256,13 @@ def postsignin(request):
                         return redirect(home)
 
             # User not found or invalid credentials
-            return render(request, 'signin.html', {'error': 'Invalid email or password'})
+            return render(request, SIGNIN_FILE, {'error': 'Invalid email or password'})
         except:
             # Failed to sign in user
-            return render(request, 'signin.html', {'error': 'Failed to sign in user'})
+            return render(request, SIGNIN_FILE, {'error': 'Failed to sign in user'})
     else:
         # Render signin page
-        return render(request, 'signin.html')
+        return render(request, SIGNIN_FILE)
 
 
 def postsignup(request):
@@ -268,7 +275,7 @@ def postsignup(request):
         
         if password1 != password2:
             # Passwords don't match
-            return render(request, 'signup.html', {'error': 'Passwords do not match'})
+            return render(request, SIGNUP_FILE, {'error': 'Passwords do not match'})
         
         try:
             # Create user in Firebase Realtime Database
@@ -294,10 +301,10 @@ def postsignup(request):
             db.child('users').push(user_data)
             
             # Redirect to success page
-            return render(request,'signin.html')
+            return render(request,SIGNIN_FILE)
         except:
             # Failed to create user
-            return render(request, 'signup.html', {'error': 'Failed to create user'})
+            return render(request, SIGNUP_FILE, {'error': 'Failed to create user'})
     else:
         # Render signup page
         return render(request, 'signup.html')
@@ -324,7 +331,7 @@ def profileview(request):
                 'Address': user_data.get("Address"),
                 'completion': completion
             }
-            return render(request, 'profile.html', context)
+            return render(request, PROFILE_FILE, context)
         elif request.session['user_type'] == 'employer':
             if database.child("users").child(profileid).child("user_type").get().val() == 'student':
                 user_data = database.child("users").child(profileid).get().val()
@@ -345,7 +352,7 @@ def profileview(request):
                     'Address': user_data.get("Address"),
                     'completion': completion
                     }
-                return render(request, 'profile.html', context)
+                return render(request, PROFILE_FILE, context)
             else:
                 #Here we would put the context and all the get functions to take from database
                 return render(request, 'Employer_profile.html')
